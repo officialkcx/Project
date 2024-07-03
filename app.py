@@ -42,7 +42,7 @@ list_for_hist = ['transmission','engine_type','body_type','state']
 
 selected_type = st.selectbox('Split for price distribution',list_for_hist)
 
-fig1 = px.histogram(df, x="price_usd",color = selected_type )
+fig1 = px.histogram(df, x="price",color = selected_type )
 fig1.update_layout(title= "<b> Split of price by {}</b>".format(selected_type))
 st.plotly_chart(fig1)
 
@@ -61,6 +61,6 @@ list_for_scatter = ['odometer_value','engine_capacity','number_of_photos']
 
 choice_for_scatter = st.selectbox('Price dependency on',list_for_scatter)
 
-fig2 = px.scatter(df, x="price_usd", y=choice_for_scatter, color ="age_category",hover_data=['year_produced'])
+fig2 = px.scatter(df, x="price", y=choice_for_scatter, color ="model_year",hover_data=['year_produced'])
 fig2.update_layout(title="<b> Price vs {}</b>".format(choice_for_scatter))
 st.plotly_chart(fig2)
