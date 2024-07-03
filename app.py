@@ -38,7 +38,7 @@ st.write("""
 ###### Let's analyze what influences price the most. We will check how distibution of price varies depending on  transmission, engine or body type and state
 """)
 
-list_for_hist = ['transmission','engine_type','body_type','state']
+list_for_hist = ['price', 'model_year', 'odometer', 'transmission', 'type', 'paint_color']
 
 selected_type = st.selectbox('Split for price distribution',list_for_hist)
 
@@ -57,10 +57,11 @@ df['age'] = 2024 - df['model_year']
 
 df['age_category'] = df['age'].apply(age_category)
 
-list_for_scatter = ['odometer_value','engine_capacity','number_of_photos']
+list_for_scatter = list_for_hist = ['price', 'model_year', 'odometer', 'transmission', 'type', 'paint_color']
+
 
 choice_for_scatter = st.selectbox('Price dependency on',list_for_scatter)
 
-fig2 = px.scatter(df, x="price", y=choice_for_scatter, color ="model_year",hover_data=['year_produced'])
+fig2 = px.scatter(df, x="price", y=choice_for_scatter, color ="model",hover_data=['model_year'])
 fig2.update_layout(title="<b> Price vs {}</b>".format(choice_for_scatter))
 st.plotly_chart(fig2)
