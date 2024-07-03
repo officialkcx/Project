@@ -14,11 +14,11 @@ df = df.drop(df.columns[0], axis=1)
 
 
 
-manufacturer_choise = df['manufacturer_name'].unique()
+manufacturer_choise = df['model'].unique()
 
 selected_manu = st.selectbox('Select an manufactirar', manufacturer_choise )
 
-min_year, max_year = int(df['year_produced'].min()), int(df['year_produced'].max())
+min_year, max_year = int(df['model_year'].min()), int(df['model_year'].max())
 
 
 year_range = st.slider("Choose years", value=(min_year, max_year), min_value=min_year,max_value= max_year)
@@ -28,7 +28,7 @@ year_range = st.slider("Choose years", value=(min_year, max_year), min_value=min
 actual_range = list(range(year_range[0], year_range[1]+1))
 
 
-df_filtered = df[ (df.manufacturer_name == selected_manu) & (df.year_produced.isin(list(actual_range)) )]
+df_filtered = df[ (df.manufacturer_name == selected_manu) & (df.model_year.isin(list(actual_range)) )]
 
 df_filtered
 
@@ -53,7 +53,7 @@ def age_category(x):
     elif x>=10 and x<20: return '10-20'
     else: return '>20'
 
-df['age'] = 2024 - df['year_produced']
+df['age'] = 2024 - df['model_year']
 
 df['age_category'] = df['age'].apply(age_category)
 
