@@ -38,7 +38,7 @@ st.write("""
 ###### Let's analyze what influences price the most. We will check how distibution of price varies depending on  transmission, engine or body type and state
 """)
 # List of columns to be used for selections
-list_for_hist = ['model', 'odometer', 'transmission', 'type', 'paint_color']
+list_for_hist = ['model', 'transmission', 'type', 'paint_color']
 
 # Streamlit selectbox for histogram
 selected_type = st.selectbox('Split for price distribution', list_for_hist)
