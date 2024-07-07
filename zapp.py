@@ -5,11 +5,14 @@ import plotly.express as px
 
 
 
-st.header('Market of used cars.Original data')
-st.write('Filter the data below to see the ads by manufacturer')
+st.header('Market of used cars')
+st.write('Filter the data below to see the price and moddel by model year')
 
 
 df = pd.read_csv('vehicles_us.csv')
+
+# Checkbox to filter by SUV type
+show_suv = st.checkbox('Show only SUV type cars')
 
 # Streamlit slider to filter by model year
 min_year = df['model_year'].min()
@@ -24,7 +27,7 @@ st.write("Filtered Table of Models and Prices:")
 st.dataframe(filtered_df[['model', 'price']])
 
 
-st.header('Price analysis')
+st.header('Data analysis')
 st.write("""
 ###### Let's analyze what influences price the most. We will check how distibution of price varies depending on  transmission, engine or body type and state
 """)
@@ -32,7 +35,7 @@ st.write("""
 list_for_hist = ['model', 'transmission', 'type', 'paint_color']
 
 # Streamlit selectbox for histogram
-selected_type = st.selectbox('Split for price distribution', list_for_hist)
+selected_type = st.selectbox('select statistic to filter by', list_for_hist)
 
 # Create and display histogram
 fig1 = px.histogram(df, x='type', y ='odometer', color=selected_type)
@@ -58,7 +61,7 @@ df['age_category'] = df['age'].apply(age_category)
 list_for_scatter = ['price', 'model_year', 'odometer', 'transmission', 'type', 'paint_color']
 
 # Streamlit selectbox for scatter plot
-choice_for_scatter = st.selectbox('Price dependency on', list_for_scatter)
+choice_for_scatter = st.selectbox('Dependency on', list_for_scatter)
 
 # Create and display scatter plot
 fig2 = px.scatter(df, x="age", y='condition', color="model", hover_data=['model_year'])
