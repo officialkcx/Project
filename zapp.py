@@ -10,26 +10,18 @@ st.write('Filter the data below to see the ads by manufacturer')
 
 
 df = pd.read_csv('vehicles_us.csv')
-df = df.drop(df.columns[0], axis=1)
 
+# Streamlit slider to filter by model year
+min_year = df['model_year'].min()
+max_year = df['model_year'].max()
+year_range = st.slider('Select the range of model year', min_year, max_year, (min_year, max_year))
 
-vehicle_type = df['type'].unique()
+# Filter the DataFrame based on the selected year range
+filtered_df = df[(df['model_year'] >= year_range[0]) & (df['model_year'] <= year_range[1])]
 
-selected_manu = st.selectbox('Select a vehicle type', vehicle_type )
-
-min_year, max_year = int(df['model_year'].min()), int(df['model_year'].max())
-
-
-year_range = st.slider("Choose years", value=(min_year, max_year), min_value=min_year,max_value= max_year)
-
-
-
-actual_range = list(range(year_range[0], year_range[1]+1))
-
-
-df_filtered = df[ (df.model == selected_manu) & (df.model_year.isin(list(actual_range)) )]
-
-df_filtered
+# Display the filtered DataFrame
+st.write("Filtered Table of Models and Prices:")
+st.dataframe(filtered_df[['model', 'price']])
 
 
 st.header('Price analysis')
