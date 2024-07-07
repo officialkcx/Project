@@ -13,10 +13,9 @@ df = pd.read_csv('vehicles_us.csv')
 df = df.drop(df.columns[0], axis=1)
 
 
+vehicle_type = df['type'].unique()
 
-manufacturer_choise = df['model'].unique()
-
-selected_manu = st.selectbox('Select an manufactirar', manufacturer_choise )
+selected_manu = st.selectbox('Select a vehicle type', vehicle_type )
 
 min_year, max_year = int(df['model_year'].min()), int(df['model_year'].max())
 

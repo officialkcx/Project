@@ -13,11 +13,12 @@ df = pd.read_csv('cars_workshop.csv')
 df = df.drop(df.columns[0], axis=1)
 
 
-vehicle_type = df['type'].unique()
 
-selected_manu = st.selectbox('Select a vehicle type', vehicle_type )
+manufacturer_choise = df['manufacturer_name'].unique()
 
-min_year, max_year = int(df['model_year'].min()), int(df['model_year'].max())
+selected_manu = st.selectbox('Select an manufactirar', manufacturer_choise )
+
+min_year, max_year = int(df['year_produced'].min()), int(df['year_produced'].max())
 
 
 year_range = st.slider("Choose years", value=(min_year, max_year), min_value=min_year,max_value= max_year)
